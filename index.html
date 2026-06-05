@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Creative Workshop | Hands-on Learning</title>
+  <!-- A clean, modern, responsive webpage for a workshop -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+      background: #faf9f8;
+      color: #1e2a3a;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* container utility */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header / navigation */
+    .site-header {
+      background: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(0px);
+      background-color: rgba(255, 255, 255, 0.96);
+    }
+
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #1f4e6e, #2c7a5e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c3e4e;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #2c7a5e;
+    }
+
+    /* buttons */
+    .btn {
+      display: inline-block;
+      background-color: #2c7a5e;
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 1.8rem;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .btn:hover {
+      background-color: #1f5e48;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(44, 122, 94, 0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #2c7a5e;
+      color: #2c7a5e;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #2c7a5e;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* hero section */
+    .hero {
+      padding: 4rem 0 5rem 0;
+      background: linear-gradient(120deg, #ffffff 0%, #f2f5f4 100%);
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-content {
+      flex: 1.2;
+      min-width: 260px;
+    }
+
+    .hero-content .badge {
+      background: #e9f3ef;
+      color: #1f5e48;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      color: #0f2c2b;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #2d4a5c;
+      margin-bottom: 2rem;
+      max-width: 90%;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat {
+      font-weight: 600;
+    }
+
+    .stat span {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #2c7a5e;
+    }
+
+    .hero-image {
+      flex: 0.9;
+      background: #cbdad3;
+      border-radius: 2rem;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(145deg, #e0ede7, #cddfd7);
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 1.5rem;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* sections general */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      color: #1e3b3a;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: #4b6a7c;
+      max-width: 700px;
+      margin: -1rem auto 3rem auto;
+    }
+
+    /* workshop details cards */
+    .cards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem 1.8rem;
+      flex: 1;
+      min-width: 240px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+      transition: all 0.25s;
+      border: 1px solid #eef3f0;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+      border-color: #d2e5dc;
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.5rem;
+    }
+
+    /* schedule table */
+    .schedule-table {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e9f0ec;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .schedule-table th, .schedule-table td {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid #e2ece6;
+    }
+
+    .schedule-table th {
+      background-color: #f4f9f6;
+      font-weight: 700;
+      color: #1c5a48;
+    }
+
+    .schedule-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* speakers */
+    .speakers-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .speaker-card {
+      background: white;
+      border-radius: 2rem;
+      text-align: center;
+      padding: 1.8rem;
+      width: 260px;
+      transition: 0.2s;
+      border: 1px solid #eef3f0;
+    }
+
+    .speaker-img {
+      width: 110px;
+      height: 110px;
+      background: #cbdad3;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      background: #e4efe9;
+    }
+
+    .speaker-name {
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* registration form */
+    .form-card {
+      background: white;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e0ede6;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1e4b3e;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid #cde0d8;
+      font-size: 1rem;
+      transition: 0.2s;
+      background: #fefefe;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: #2c7a5e;
+      box-shadow: 0 0 0 3px rgba(44, 122, 94, 0.2);
+    }
+
+    .register-btn {
+      width: 100%;
+      background: #1f5e48;
+      padding: 0.9rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 60px;
+    }
+
+    .register-message {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #2c7a5e;
+    }
+
+    /* footer */
+    .footer {
+      background: #11241f;
+      color: #ccdfd9;
+      padding: 3rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .footer a {
+      color: #b9dfcf;
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        flex-direction: column;
+      }
+      .nav-links {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      .hero-content p {
+        max-width: 100%;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .form-card {
+        padding: 1.5rem;
+      }
+      .schedule-table th, .schedule-table td {
+        padding: 0.7rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">✨ 2nd Uzbek-Sino Workshop </div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#speakers">Speakers</a></li>
+        <li><a href="#register">Register</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge">🔥 Limited seats · Hands-on workshop</div>
+        <h1>Build, create & <br> innovate together</h1>
+        <p>Join our full-day interactive workshop where design meets development. Perfect for beginners and intermediates who want to level up their practical skills.</p>
+        <a href="#register" class="btn">🎟️ Reserve your spot →</a>
+        <div class="hero-stats">
+          <div class="stat"><span>3+</span> <br>Projects</div>
+          <div class="stat"><span>8h</span> <br>Immersive learning</div>
+          <div class="stat"><span>40</span> <br>Participants max</div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <!-- Workshop decorative illustration (emoji / svg-like shape) - using pure HTML/CSS friendly representation -->
+        <div style="padding: 1rem;">
+          <div style="font-size: 8rem; line-height: 1;">🧑‍💻🎨🛠️</div>
+          <p style="margin-top: 1rem; font-weight: 500;">create + design + build science</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About + workshop details -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">What makes this workshop special?</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">📘</div>
+          <h3>Project-based</h3>
+          <p>Build a real mini calculation from scratch with guided mentorship and peer feedback.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤝</div>
+          <h3>Collaborative vibe</h3>
+          <p>Work in small groups, pair reading, calculating, and share insights. Ideal for networking.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <h3>Certificate</h3>
+          <p> Receive a digital certificate of completion and a workshop kit with resources.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍕</div>
+          <h3>Lunch & snacks</h3>
+          <p>Enjoy complimentary coffee, snacks, and a networking lunch included.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section id="schedule" style="background: #fefcf9;">
+    <div class="container">
+      <h2 class="section-title">📅 Workshop schedule</h2>
+      <p class="section-sub">June 19 - 20, 2026 · 10:00 AM – 6:00 PM (Online & in-person hybrid)</p>
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Time</th><th>Session</th><th>Lead</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>10:00 – 10:45</td><td>Opening & Keynote </td><td> Prof. Chengxun Yuan </td></tr>
+          <tr><td>10:45 – 12:30</td><td>Theoretical Physics & Interdisciplinary Science </td><td> Prof. Bobomurat J. Ahmedov </td></tr>
+          <tr><td>12:30 – 13:30</td><td>☕ Lunch break & networking</td><td>—</td></tr>
+          <tr><td>13:30 – 15:15</td><td> A cosmic whirlwind: New perspectives from extended math and cosmologies </td><td> Prof. Pierros Ntelis </td></tr>
+          <tr><td>15:15 – 15:45</td><td>Afternoon coffee & peer review</td><td>—</td></tr>
+          <tr><td>15:45 – 17:30</td><td>Extracting Black Hole Signatures from Accretion Disk Emission</td><td> Prof. Bakhtiyor Narzilloev</td></tr>
+          <tr><td>17:30 – 18:00</td><td>Closing remarks & certificate ceremony</td><td>Organizers</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Speakers -->
+  <section id="speakers">
+    <div class="container">
+      <h2 class="section-title">🌟 Meet your workshop leaders</h2>
+      <div class="speakers-grid">
+        <div class="speaker-card">
+          <div class="speaker-img">🧑‍💻</div>
+          <div class="speaker-name"> Prof. Chengxun Yuan</div>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem;"> Prof. and Vice Dean at Harbin Institute of Technology (HIT), School of Physics  </p>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-img">🧑‍💻</div>
+          <div class="speaker-name"> Prof. Bobomurat J. Ahmedov </div>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem;"> Prof. and Dean at National University of Uzbekistan (NUU) </p>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-img">🧑‍💻</div>
+          <div class="speaker-name"> Vi. Prof. Pierros Ntelis </div>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem;"> Theoretical Cosmologist at HIT, and NUU </p>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-img">🧑‍💻</div>
+          <div class="speaker-name"> Scientific Coordinator Dr. Mirzabek Alloqulov </div>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem;"> Theoretical Physicist at HIT, and NUU </p>
+        </div>        
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Form + embedded demo (GitHub Pages friendly) -->
+<section id="register" style="background: linear-gradient(to bottom, #ffffff, #f4f8f5);">
+  <div class="container">
+    <h2 class="section-title">📝 Secure your seat</h2>
+    <p class="section-sub">Free registration · Limited to 40 participants</p>
+    
+    <div class="form-card" style="text-align: center;">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">📋</div>
+      <h3 style="margin-bottom: 1rem; color: #1e3b3a;">Register via Google Form</h3>
+      <p style="margin-bottom: 2rem; color: #4b6a7c;">Click the button below to complete your registration. You'll be redirected to a secure Google Form. (Don't forget to open your VPN service if you have trouble connecting from China)</p>
+      
+      <a href="https://forms.gle/YB2n8LknDS4ed5xR9" target="_blank" rel="noopener noreferrer" class="btn" style="font-size: 1.2rem; padding: 1rem 2rem;">
+        ✨ Register Now on Google Form →
+      </a>
+      
+      <p style="margin-top: 2rem; font-size: 0.8rem; color: #5d7a6c;">
+        🔒 Your information is collected via Google Forms and stored securely in a Google Sheet.
+      </p>
+    </div>
+  </div>
+</section>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+  
+<footer class="footer">
+  <div class="container">
+    <p>📍 Uzbek-Sino Workshop · Hybrid event — Online + In-person at Creative Hub, 123 Design Street</p>
+    <p style="margin-top: 0.75rem;">📧 ntelis.pierros@hit.edu.cn | 📞 +1 (000) 000-0000</p>
+    <p style="margin-top: 1rem;">© 2026 Uzbek-Sino Workshop – All insights are hands-on.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">🍃 Hosted with 💚 for the Cosmic and Scientific Community</p>
+  </div>
+</footer>
+
+<!-- Simple JavaScript for registration simulation (alert + console, no actual backend, but GitHub Pages friendly) -->
+<script>
+  (function() {
+    const form = document.getElementById('workshopForm');
+    const feedbackDiv = document.getElementById('formFeedback');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();   // prevent actual page reload
+
+      const nameInput = document.getElementById('fullname');
+      const emailInput = document.getElementById('email');
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+
+      if (name === '' || email === '') {
+        feedbackDiv.innerHTML = '⚠️ Please fill in both name and email address.';
+        feedbackDiv.style.color = '#b33b2c';
+        return;
+      }
+
+      if (!email.includes('@') || !email.includes('.')) {
+        feedbackDiv.innerHTML = '📧 Please enter a valid email address (e.g., name@domain.com).';
+        feedbackDiv.style.color = '#b33b2c';
+        return;
+      }
+
+      const ticketSelect = document.getElementById('ticket');
+      const ticketOption = ticketSelect.options[ticketSelect.selectedIndex].text;
+      
+      // Simulate a successful registration – show confirmation and reset optional fields (but keep for demo)
+      feedbackDiv.innerHTML = `🎉 Thanks ${name}! Your registration for "${ticketOption}" was received. We’ll send workshop details to ${email}. See you soon! 🚀`;
+      feedbackDiv.style.color = '#1f5e48';
+      
+      // (Optional) clear the message after 5 seconds? keep for user experience
+      // But we also reset form fields? I'll just keep for clarity, not clearing all to avoid annoyance.
+      // Clear only the feedback after a while? not needed, but we can reset fields optionally? 
+      // However if someone wants to re-submit, it's a simulation. Better keep data, but to be nice we can reset form? 
+      // I prefer to leave as is to show success, but we don't actually send data. Let's not reset automatically.
+      // For better UX, set a timeout to clear success message after 8 seconds (optional)
+      setTimeout(() => {
+        if (feedbackDiv.innerHTML.includes('Thanks')) {
+          // keep message but change style? no need, just keep it visible as confirmation.
+          // we'll do nothing, but avoid removing to make it friendly
+        }
+      }, 8000);
+
+      // additionally, we could scroll the message into view smoothly
+      feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      
+      // You could also console.log registration data for demo
+      console.log(`Workshop registration: ${name}, ${email}, ticket: ${ticketOption}`);
+    });
+  })();
+</script>
+</body>
+</html>
